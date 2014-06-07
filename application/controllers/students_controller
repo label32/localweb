@@ -1,0 +1,28 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+include_once (dirname(__FILE__) . "/main_controller.php");
+class Students_controller extends Main_controller {
+
+    public function __construct() {
+        parent::__construct();
+
+        if(!$this->is_loged()){
+        	header("Location: /login");
+        	exit();
+        }
+    }
+
+    public function add_student()
+	{
+
+		$profi = array('prof1','prof2', 'prof3' );
+
+		$data = array(
+			'profi' => $profi, 
+			'page_name' => "Toti studentii"
+		);
+
+		$this->load->view('templates/header', array('page_title' => "Add student"));
+		$this->load->view('students/add_student', $data);
+		$this->load->view('templates/footer');
+	}
