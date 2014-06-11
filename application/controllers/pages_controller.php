@@ -12,65 +12,72 @@ class Pages_controller extends Main_controller {
         }
     }
 
+    public function add_user($type) 
+    {
+    	if($type != 'student' && $type !='professor') {
+    	 	$this->load->view('templates/error_404');
+    	 	return 0;
+    	}
 
-	public function all_students()
-	{
+    	if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+			$this->load->view('templates/header', array('page_title' => "Add student"));
+			$this->load->view('users/add_user', array('type'=>$type));
+			$this->load->view('templates/footer');
+		}
+		else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-		//scoti studentii din BD intr-un array:
+			
+			$data = array(
+				'Name' => $this->input->post('name'),
+				'Email' => $this->input->post('email'), 
+				'Password' => md5($this->input->post('password')),
+				'Type' => $type=='professor'?1:2
+				);
 
-		$studenti = array(
-			array('id' => 1 ,'nume' => 'ion', 'email' => 'ion@ion.com', 'varsta' => 22 ),
-			array('id' => 2 ,'nume' => 'dorin', 'email' => 'ion@ion.com', 'varsta' => 22 ),
-			array('id' => 3 ,'nume' => 'pidorin', 'email' => 'ion@ion.com', 'varsta' => 22 ),
-			array('id' => 4 ,'nume' => 'cep', 'email' => 'ion@ion.com', 'varsta' => 22 ),
-			array('id' => 5 ,'nume' => 'ceporin', 'email' => 'ion@ion.com', 'varsta' => 22 ),
-			array('id' => 6 ,'nume' => 'ion', 'email' => 'ion@ion.com', 'varsta' => 22 ),
-			array('id' => 7 ,'nume' => 'ion', 'email' => 'ion@ion.com', 'varsta' => 22 ) 
-		);
+			$this->user_model->insert_user($data);
+			$type=='professor'?header('Location: /profs'):header('Location: /');
 
-		//alte date care le trimiti la view: 
+		} else {
+			$this->load->view('templates/error_404');
+		}    	
+    }
 
-		$data = array(
-			'studenti' => $studenti, 
-			'page_name' => "Toti studentii"
-		);
+    public function edit_user($id, $type) 
+    {
 
+    	if($type != 'student' && $type !='professor') {
+    	 	$this->load->view('templates/error_404');
+    	 	return 0;
+    	}
 
+    	if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
-		$this->load->view('templates/header');
-		$this->load->view('students/students', $data);
-		$this->load->view('templates/footer');
-	}
+    		$result = $this->user_model->get_user($id, $type=='professor'?1:2);
 
-	public function add_student()
-	{
+    		$data = array(
+    			'type' => $type,
+    			'user' => $result[0]
+    			);
 
-		$profi = array('prof1','prof2', 'prof3' );
+			$this->load->view('templates/header', array('page_title' => "Edit user"));
+			$this->load->view('users/edit_user', $data);
+			$this->load->view('templates/footer');
+		}
+		else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-		$data = array(
-			'profi' => $profi, 
-			'page_name' => "Toti studentii"
-		);
+			
+			$data = array(
+				'Name' => $this->input->post('name'),
+				'Email' => $this->input->post('email'), 
+				'Password' => md5($this->input->post('password')),
+				'Type' => $type=='professor'?1:2
+				);
 
-		$this->load->view('templates/header', array('page_title' => "Add student"));
-		$this->load->view('students/add_student', $data);
-		$this->load->view('templates/footer');
-	}
+			$this->user_model->update_user($id, $data);
+			$type=='professor'?header('Location: /profs'):header('Location: /');
 
-	public function all_profs()
-	{
-		$this->load->view('templates/header');
-		$this->load->view('profs/profs');
-		$this->load->view('templates/footer');
-	}
-
-	public function all_materii() // :))
-	{
-		$this->load->view('templates/header');
-		$this->load->view('materii/materii');
-		$this->load->view('templates/footer');
-	}
-
-
-	
+		} else {
+			$this->load->view('templates/error_404');
+		}    	
+    }		
 }

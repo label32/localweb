@@ -4,6 +4,6 @@
           <ul class="nav nav-sidebar">
             <li><a href="/">Students</a></li>
             <li><a href="/profs">Professors</a></li>
-            <li><a href="/materii">Classes</a></li>
+            <li><a href="/classes">Classes</a></li>
           </ul>
         </div>
