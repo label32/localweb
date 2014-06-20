@@ -20,6 +20,7 @@ class User_Model extends CI_Model {
                 return $query->result();
         }
 
+
         function get_user($id, $type)
         {              
                 $this->db->select('*');
@@ -29,6 +30,14 @@ class User_Model extends CI_Model {
 
                 $query = $this->db->get();
                 return $query->result();
+        }
+
+        function get_user2($id) {
+                $this->db->select('*');
+                $this->db->from('users');
+                $this->db->where('Id',$id);
+                $query = $this->db->get();
+                return $query->result();                
         }
 
         function insert_user($data) 

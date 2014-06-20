@@ -21,4 +21,7 @@ $route['class/add'] = "classes_controller/add_class";
 $route['class/edit/(:num)'] = "classes_controller/edit_class/$1";
 $route['class/delete/(:num)'] = "classes_controller/delete_class/$1";
 
+$route['android/get_user/(:num)'] = "android_controller/get_user/$1";
+$route['android/get_classes/(:num)'] = "android_controller/get_classes/$1";
+
 $route['404_override'] = 'main_controller/error_404';
