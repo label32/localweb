@@ -8,6 +8,21 @@ class Class_Model extends CI_Model {
         return $query->result();
 	}
 
+	function get_userClasses($userid) {
+		$this->db->select('classes.*');
+		$this->db->from('userclasses');
+		$this->db->join('classes', 'classes.id = userclasses.ClassId');
+		$this->db->where('UserId',$userid);
+
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	function get_classDays($classid) {
+		$query = $this->db->get_where('schedule', array('ClassId' => $classid));
+		return $query->result();
+	}
+
 	function get_class_schedule($classid) 
 	{
 		$query = $this->db->get_where('schedule', array('ClassId' => $classid));

@@ -23,5 +23,8 @@ $route['class/delete/(:num)'] = "classes_controller/delete_class/$1";
 
 $route['android/get_user/(:num)'] = "android_controller/get_user/$1";
 $route['android/get_classes/(:num)'] = "android_controller/get_classes/$1";
+$route['android/get_tasks/(:num)'] = "android_controller/get_tasks/$1";
+$route['android/login/(:any)'] = "android_controller/login/$1";
+$route['android/test/(:any)'] = "android_controller/test/$1";
 
 $route['404_override'] = 'main_controller/error_404';

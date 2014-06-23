@@ -14,6 +14,16 @@ class User_Model extends CI_Model {
                 	return false;
 	}
 
+        function login2($email, $pass) {
+                $this->db->where('Email', $email);
+                $this->db->where('Password', $pass);
+                
+                $query = $this->db->get('Users');        
+                if($query->num_rows == 1) {
+                        return $query->result();
+                } 
+        }
+
         function get_users($type) 
         {
                 $query = $this->db->get_where('users', array('type' => $type));
