@@ -52,6 +52,12 @@ class Class_Model extends CI_Model {
     	$this->db->delete('classes', array('Id' => $id)); 
     }
 
+    function update_class($classid, $class) 
+    {
+    	$this->db->where('id', $classid);
+    	$this->db->update('classes', $class);
+    }
+
     function add_users_to_class($classid, $userids) 
     {
     	foreach ($userids as $userid) {
@@ -72,6 +78,26 @@ class Class_Model extends CI_Model {
 				);
     		$this->db->insert('schedule',$data);
     	}
+    }
+
+    function update_class_schedule($classid, $days) {
+    	
+    	$this->db->where('Classid', $classid);
+		$this->db->delete('schedule'); 
+
+		foreach ($days as $day) {
+    		$data = array(
+				'ClassId' => $classid,
+				'Day' => $day
+				);
+    		$this->db->insert('schedule',$data);
+    	}
+    }
+
+     function delete_class_schedule($classid) {
+    	
+    	$this->db->where('Classid', $classid);
+		$this->db->delete('schedule'); 
     }
 
 }

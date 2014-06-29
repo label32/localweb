@@ -17,23 +17,25 @@ class Classes_controller extends Main_controller {
 		$classes = $this->class_model->get_classes();
 		$cls = array();
 		foreach ($classes as $class) {
-			$rows = $this->class_model->get_class_schedule($class->Id);
-			$class_prof = $this->class_model->get_class_prof($class->Id);
-			$days = "";
-			$first = true;
-			foreach ($rows as $row) {
-				if($first) {
-					$days .= $this->day_tostr($row->Day);
-					$first = false;
+			if($class->Offline == 0) {
+				$rows = $this->class_model->get_class_schedule($class->Id);
+				$class_prof = $this->class_model->get_class_prof($class->Id);
+				$days = "";
+				$first = true;
+				foreach ($rows as $row) {
+					if($first) {
+						$days .= $this->day_tostr($row->Day);
+						$first = false;
+					}
+					else
+						$days .= ", ".$this->day_tostr($row->Day);
 				}
-				else
-					$days .= ", ".$this->day_tostr($row->Day);
+				array_push($cls, array(
+					'class' => $class,
+					'days' => $days, 
+					'prof' => $class_prof[0]
+					));
 			}
-			array_push($cls, array(
-				'class' => $class,
-				'days' => $days, 
-				'prof' => $class_prof[0]
-				));
 		}
 
 		$data = array(
@@ -88,9 +90,11 @@ class Classes_controller extends Main_controller {
 				'Details' => $this->input->post('details'),
 				'StartTime' => $this->input->post('start_time'),
 				'EndTime' => $this->input->post('end_time'),
+				'Offline' => '0'
 				);
 			
 			$classid = $this->class_model->insert_class($class_data);
+			
 			$this->class_model->add_users_to_class($classid, $user_ids);
 
 			$days = $this->input->post('days');
