@@ -2,10 +2,14 @@
 
 class Class_Model extends CI_Model {
 
-	function get_classes() 
-	{
+	function get_classes() {
 		$query = $this->db->get('classes');
         return $query->result();
+	}
+
+	function get_class($classid) {
+		$query = $this->db->get_where('classes', array('Id' => $classid));
+		return $query->result();
 	}
 
 	function get_userClasses($userid) {
@@ -36,6 +40,18 @@ class Class_Model extends CI_Model {
 		$this->db->join('users', 'users.id = userclasses.UserId');
 		$this->db->where('ClassId',$classid);
 		$this->db->where('Type',1);
+
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	function get_students_in_class($classid)
+	{
+		$this->db->select('*');
+		$this->db->from('userclasses');
+		$this->db->join('users', 'users.id = userclasses.UserId');
+		$this->db->where('ClassId',$classid);
+		$this->db->where('Type',2);
 
 		$query = $this->db->get();
 		return $query->result();
