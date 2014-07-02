@@ -16,6 +16,7 @@
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/css/bootstrap-timepicker.min.css" rel="stylesheet">
     <link href="/assets/css/main.css" rel="stylesheet">
+	<link rel="stylesheet" media="screen" type="text/css" href="/assets/css/colorpicker.css" />
     <link href="/assets/css/chosen.min.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->

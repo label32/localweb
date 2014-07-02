@@ -71,6 +71,14 @@
     </div>
     </div>
   </div>
+  
+  <div class="form-group">
+    <label for="inputColor" class="col-sm-2 control-label">Color</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="inputColor" placeholder="Color" name="color">
+	  <div id="colorBox" ></div>
+    </div>
+  </div>
 
   <div class="form-group">
     <label for="inputPassword3" class="col-sm-2 control-label">Professor</label>

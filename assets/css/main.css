@@ -18,14 +18,15 @@ textarea {
 }
 
 
-
-
-
-
-
-
-
-
+div#colorBox {
+width: 25px;
+height: 25px;
+background: white;
+position: absolute;
+top: 5px;
+right: 21px;
+border-radius: 50%;
+}
 
 
 

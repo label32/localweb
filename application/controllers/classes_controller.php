@@ -83,6 +83,9 @@ class Classes_controller extends Main_controller {
 
 			if(!empty($prof_id))
 				array_push($user_ids, $prof_id);
+
+			$color_hex = $this->input->post('color');
+			$color_int = hexdec($color_hex);
 			
 			$class_data = array(
 				'Name' => $this->input->post('name'),
@@ -90,6 +93,7 @@ class Classes_controller extends Main_controller {
 				'Details' => $this->input->post('details'),
 				'StartTime' => $this->input->post('start_time'),
 				'EndTime' => $this->input->post('end_time'),
+				'Color' => $color_int,
 				'Offline' => '0'
 				);
 			

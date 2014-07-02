@@ -9,8 +9,26 @@
     <!--<script src="http://getbootstrap.com/assets/js/docs.min.js"></script>-->
     <script src="http://localhost/assets/js/chosen.jquery.min.js"></script>
     <script src="/assets/js/bootstrap-timepicker.min.js"></script>
+	
+<script type="text/javascript" src="/assets/js/colorpicker.js"></script>
 
     <script type="text/javascript">
+	
+		$('#inputColor').ColorPicker({
+			color: '#0000ff',
+			onShow: function (colpkr) {
+				$(colpkr).fadeIn(500);
+				return false;
+			},
+			onHide: function (colpkr) {
+				$(colpkr).fadeOut(500);
+				return false;
+			},
+			onChange: function (hsb, hex, rgb) {
+				$('#colorBox').css('backgroundColor', '#' + hex);
+				$('#inputColor').val('#' + hex);
+			}
+		})
     
         $('.chosen-select').chosen({width:"100%"});
 
