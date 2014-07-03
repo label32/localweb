@@ -2,7 +2,7 @@
 
 class User_Model extends CI_Model {
 
-	function login($email, $pass)
+        function login($email, $pass)
 	{
 		$this->db->where('Email', $email);
                 $this->db->where('Password', $pass);

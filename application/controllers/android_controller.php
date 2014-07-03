@@ -16,6 +16,22 @@ class Android_controller extends CI_Controller {
 		echo json_encode($result[0]);
     }
 
+    public function register() {
+    	$data = array(
+    		'Name' => $this->input->get('name'),
+    		'Email' => $this->input->get('email'),
+    		'Password' => $this->input->get('pass'),
+    		'Type' => $this->input->get('type')
+    		);
+
+    	$userid = $this->user_model->insert_user($data);
+    	$result = array(
+    			'userid' => $userid
+    		);
+    	header('Content-Type: application/json');
+		echo json_encode($result);
+    }
+
     public function test($classid) {
     	$data = $this->class_model->get_class_schedule($classid);
     	$days = array();
